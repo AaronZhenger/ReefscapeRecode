@@ -25,19 +25,33 @@ import edu.wpi.first.units.measure.Voltage;
 public interface CascadeIO {
     @AutoLog
     public static class CascadeIOInputs {
-        private Distance cascadeDistance = Meters.of(0);
-        private LinearVelocity cascadeVelocity = MetersPerSecond.of(0);
-        private LinearAcceleration cascadeAcceleration = MetersPerSecondPerSecond.of(0);
-        private Voltage cascadeVoltage = Volts.of(0);
-        private Current cascadeCurrent = Amps.of(0);
-        private Temperature cascadeTemperature = Celsius.of(0);
+        public Distance cascadeMasterDistance = Meters.of(0);
+        public LinearVelocity cascadeMasterVelocity = MetersPerSecond.of(0);
+        public LinearAcceleration cascadeMasterAcceleration = MetersPerSecondPerSecond.of(0);
+        public Voltage cascadeMasterVoltage = Volts.of(0);
+        public Current cascadeMasterCurrent = Amps.of(0);
+        public Temperature cascadeMasterTemperature = Celsius.of(0);
+
+        public Distance cascadeSlaveDistance = Meters.of(0);
+        public LinearVelocity cascadeSlaveVelocity = MetersPerSecond.of(0);
+        public LinearAcceleration cascadeSlaveAcceleration = MetersPerSecondPerSecond.of(0);
+        public Voltage cascadeSlaveVoltage = Volts.of(0);
+        public Current cascadeSlaveCurrent = Amps.of(0);
+        public Temperature cascadeSlaveTemperature = Celsius.of(0);
         
-        private Rotation2d pivotDistance = new Rotation2d();
-        private AngularVelocity pivotVelocity = RadiansPerSecond.of(0);
-        private AngularAcceleration pivotAcceleration = RadiansPerSecondPerSecond.of(0);
-        private Voltage pivotVoltage = Volts.of(0);
-        private Current pivotCurrent = Amps.of(0);
-        private Temperature pivotTemperature = Celsius.of(0);
+        public Rotation2d pivotMasterDistance = new Rotation2d();
+        public AngularVelocity pivotMasterVelocity = RadiansPerSecond.of(0);
+        public AngularAcceleration pivotMasterAcceleration = RadiansPerSecondPerSecond.of(0);
+        public Voltage pivotMasterVoltage = Volts.of(0);
+        public Current pivotMasterCurrent = Amps.of(0);
+        public Temperature pivotMasterTemperature = Celsius.of(0);
+
+        public Rotation2d pivotSlaveDistance = new Rotation2d();
+        public AngularVelocity pivotSlaveVelocity = RadiansPerSecond.of(0);
+        public AngularAcceleration pivotSlaveAcceleration = RadiansPerSecondPerSecond.of(0);
+        public Voltage pivotSlaveVoltage = Volts.of(0);
+        public Current pivotSlaveCurrent = Amps.of(0);
+        public Temperature pivotSlaveTemperature = Celsius.of(0);
     }
 
     public void updateInputs(CascadeIOInputs inputs);

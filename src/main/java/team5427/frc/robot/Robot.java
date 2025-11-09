@@ -22,7 +22,6 @@ import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 import team5427.frc.robot.subsystems.Swerve.DrivingConstants;
 import team5427.frc.robot.subsystems.Swerve.SwerveConstants;
-import team5427.frc.robot.subsystems.intake.IntakeConstants;
 import team5427.frc.robot.subsystems.vision.io.QuestNav;
 import team5427.lib.drivers.JoystickLogger;
 import team5427.lib.drivers.VirtualSubsystem;
@@ -89,7 +88,7 @@ public class Robot extends LoggedRobot {
 
   private void loadConstants() {
     System.out.println(SwerveConstants.class);
-    System.out.println(IntakeConstants.class);
+    // System.out.println(IntakeConstants.class);
     System.out.println(DrivingConstants.class);
     // loading a random LoggedTunableNumber
     System.out.println(DrivingConstants.kRotationKp);

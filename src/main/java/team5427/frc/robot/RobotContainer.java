@@ -18,7 +18,6 @@ import team5427.frc.robot.io.DriverProfiles;
 import team5427.frc.robot.io.OperatorControls;
 import team5427.frc.robot.io.PilotingControls;
 import team5427.frc.robot.subsystems.Swerve.SwerveSubsystem;
-import team5427.frc.robot.subsystems.intake.IntakeSubsystem;
 import team5427.frc.robot.subsystems.vision.VisionSubsystem;
 import team5427.frc.robot.subsystems.vision.io.QuestNav;
 
@@ -44,18 +43,15 @@ public class RobotContainer {
     switch (Constants.currentMode) {
       case REAL:
         SwerveSubsystem.getInstance(RobotPose.getInstance()::addOdometryMeasurement);
-        IntakeSubsystem.getInstance();
         break;
       case REPLAY:
         SwerveSubsystem.getInstance(RobotPose.getInstance()::addOdometryMeasurement);
-        IntakeSubsystem.getInstance();
         break;
       case SIM:
         SwerveSubsystem.getInstance(RobotPose.getInstance()::addOdometryMeasurement);
         SimulatedArena.getInstance()
             .addDriveTrainSimulation(SwerveSubsystem.getInstance().getKDriveSimulation());
         SimulatedArena.getInstance().clearGamePieces();
-        IntakeSubsystem.getInstance(SwerveSubsystem.getInstance()::getKDriveSimulation);
         break;
       default:
         break;

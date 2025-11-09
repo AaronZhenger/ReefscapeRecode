@@ -26,18 +26,33 @@ public class CascadeIOMagicTalon implements CascadeIO {
     
     private CANcoder pivotCANcoder;
 
-    private StatusSignal<Distance> cascadeDistance;
-    private StatusSignal<LinearVelocity> cascadeVelocity;
-    private StatusSignal<LinearAcceleration> cascadeAcceleration;
-    private StatusSignal<Voltage> cascadeVoltage;
-    private StatusSignal<Current> cascadeCurrent;
-    private StatusSignal<Temperature> cascadeTemperature;
-    private StatusSignal<Rotation2d> pivotDistance;
-    private StatusSignal<AngularVelocity> pivotVelocity;
-    private StatusSignal<AngularAcceleration> pivotAcceleration;
-    private StatusSignal<Voltage> pivotVoltage;
-    private StatusSignal<Current> pivotCurrent;
-    private StatusSignal<Temperature> pivotTemperature;
+    private StatusSignal<Distance> cascadeMasterDistance;
+    private StatusSignal<LinearVelocity> cascadeMasterVelocity;
+    private StatusSignal<LinearAcceleration> cascadeMasterAcceleration;
+    private StatusSignal<Voltage> cascadeMasterVoltage;
+    private StatusSignal<Current> cascadeMasterCurrent;
+    private StatusSignal<Temperature> cascadeMasterTemperature;
+
+    private StatusSignal<Distance> cascadeSlaveDistance;
+    private StatusSignal<LinearVelocity> cascadeSlaveVelocity;
+    private StatusSignal<LinearAcceleration> cascadeSlaveAcceleration;
+    private StatusSignal<Voltage> cascadeSlaveVoltage;
+    private StatusSignal<Current> cascadeSlaveCurrent;
+    private StatusSignal<Temperature> cascadeSlaveTemperature;
+
+    private StatusSignal<Rotation2d> pivotMasterDistance;
+    private StatusSignal<AngularVelocity> pivotMasterVelocity;
+    private StatusSignal<AngularAcceleration> pivotMasterAcceleration;
+    private StatusSignal<Voltage> pivotMasterVoltage;
+    private StatusSignal<Current> pivotMasterCurrent;
+    private StatusSignal<Temperature> pivotMasterTemperature;
+
+    private StatusSignal<Rotation2d> pivotSlaveDistance;
+    private StatusSignal<AngularVelocity> pivotSlaveVelocity;
+    private StatusSignal<AngularAcceleration> pivotSlaveAcceleration;
+    private StatusSignal<Voltage> pivotSlaveVoltage;
+    private StatusSignal<Current> pivotSlaveCurrent;
+    private StatusSignal<Temperature> pivotSlaveTemperature;
 
     public CascadeIOMagicTalon() {
         cascadeMotorMaster = new MagicSteelTalonFX(CascadeConstants.kCascadeMasterId);
@@ -48,7 +63,7 @@ public class CascadeIOMagicTalon implements CascadeIO {
         cascadeMotorMaster.apply(CascadeConstants.kCascadeDriverConfiguration);
         cascadeMotorSlave.apply(new MotorConfiguration(CascadeConstants.kCascadeDriverConfiguration));
         pivotMotorMaster.apply(CascadeConstants.kPivotConfiguration);
-        pivotMotorMaster.apply(new MotorConfiguration(CascadeConstants.kPivotConfiguration));
+        pivotMotorSlave.apply(new MotorConfiguration(CascadeConstants.kPivotConfiguration));
 
         pivotCANcoder =
         new CANcoder(
@@ -56,12 +71,11 @@ public class CascadeIOMagicTalon implements CascadeIO {
             CascadeConstants.kPivotCANcoderId.getBus());
         pivotCANcoder.getConfigurator().apply(CascadeConstants.pivotEncoderConfig);
 
-
-        cascadeCurrent = cascadeMotorMaster.getTalonFX().getStatorCurrent();
+        cascadeMasterCurrent = cascadeMotorMaster.getTalonFX().getStatorCurrent();
 
         BaseStatusSignal.setUpdateFrequencyForAll(
             50.0,
-            cascadeCurrent
+            cascadeMasterCurrent
         );
 
         ParentDevice.optimizeBusUtilizationForAll(cascadeMotorMaster.getTalonFX());
