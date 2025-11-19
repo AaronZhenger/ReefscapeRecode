@@ -98,7 +98,6 @@ public class PilotingControls {
                   Superstructure.kSelectedSwerveState = SwerveStates.RAW_DRIVING;
                 }));
 
-
     Superstructure.SwerveStates.SwerveTriggers.kRawDriving
         .and(autonTrigger.negate())
         .and(disabledTrigger.negate())

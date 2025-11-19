@@ -6,8 +6,6 @@ package team5427.frc.robot;
 
 import static edu.wpi.first.units.Units.Hertz;
 
-import java.util.Optional;
-
 import com.ctre.phoenix6.CANBus;
 import com.pathplanner.lib.config.RobotConfig;
 import edu.wpi.first.math.util.Units;
@@ -15,6 +13,7 @@ import edu.wpi.first.units.measure.Frequency;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import java.util.Optional;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -76,10 +75,10 @@ public final class Constants {
     public static final double kDriverControllerJoystickDeadzone = 0.0;
     public static final double kDriverControllerRotationalControlJoystickDeadzone = 0.05;
   }
+
   // public static final double kOdometryFrequency = 100; // hz - so every 10 ms
 
   public static Optional<Alliance> kAlliance;
-
 
   static {
   }
