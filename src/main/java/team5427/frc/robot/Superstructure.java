@@ -89,4 +89,15 @@ public final class Superstructure {
     Logger.recordOutput(dashboardKey + "/" + "SwerveState", kSelectedSwerveState);
     Logger.recordOutput(dashboardKey + "/" + "IntakeState", kSelectedIntakeState);
   }
+
+  public enum ProngEffectorStates {
+    ALGAE_INTAKE,
+    ALGAE_OUTAKE,
+    CORAL_INTAKE,
+    CORAL_OUTAKE,
+    CORAL_STOWED,
+    ALGAE_STOWED,
+    DISABLED,
+    IDLE;
+  }
 }

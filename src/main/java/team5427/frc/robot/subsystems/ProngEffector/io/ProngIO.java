@@ -28,7 +28,6 @@ public interface ProngIO {
     public Current wristCurrent = Amps.of(0.0);
     public Voltage wristVoltage = Volts.of(0.0);
 
-    public Rotation2d rollerPosition = Rotation2d.kZero;
     public LinearVelocity rollerVelocity = MetersPerSecond.of(0.0);
     public LinearAcceleration rollerAcceleration = MetersPerSecondPerSecond.of(0.0);
 
