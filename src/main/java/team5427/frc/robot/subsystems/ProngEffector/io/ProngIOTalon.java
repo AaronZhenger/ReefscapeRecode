@@ -41,11 +41,15 @@ public class ProngIOTalon implements ProngIO {
 
   public ProngIOTalon() {
     wrist = new MagicSteelTalonFX(ProngConstants.kWristServoId);
+    wrist.useTorqueCurrentFOC(true);
+
     wrist.apply(ProngConstants.kWristConfiguration);
     wrist.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
     wrist.getTalonFX().getConfigurator().apply(wrist.talonConfig);
+    
 
     roller = new SteelTalonFX(ProngConstants.kRollerServoId);
+    
     roller.apply(ProngConstants.kRollerConfiguration);
 
     wristPosition = wrist.getTalonFX().getPosition();

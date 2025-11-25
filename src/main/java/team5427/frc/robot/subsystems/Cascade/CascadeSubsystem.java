@@ -39,6 +39,6 @@ public class CascadeSubsystem extends SubsystemBase {
   }
 
   public boolean cascadeAtGoal() {
-    return inputs.cascadeMasterDistance.minus(setpoint).in(Meters) < 0.1;
+    return inputs.cascadeHeight.minus(setpoint).in(Meters) < 0.1;
   }
 }
