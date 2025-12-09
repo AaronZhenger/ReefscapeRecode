@@ -47,7 +47,6 @@ public class ProngIOTalon implements ProngIO {
     wrist.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
     wrist.getTalonFX().getConfigurator().apply(wrist.talonConfig);
     
-
     roller = new SteelTalonFX(ProngConstants.kRollerServoId);
     
     roller.apply(ProngConstants.kRollerConfiguration);

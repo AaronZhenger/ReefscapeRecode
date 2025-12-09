@@ -40,4 +40,22 @@ public class Lights extends Command {
 
         lightsSubsystem.setPattern(pattern);
     }
+
+    @Override
+    public void execute() {
+        // TODO Auto-generated method stub
+        super.execute();
+    }
+
+    @Override
+    public boolean isFinished() {
+        // TODO Auto-generated method stub
+        return super.isFinished();
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        // TODO Auto-generated method stub
+        super.end(interrupted);
+    }
 }

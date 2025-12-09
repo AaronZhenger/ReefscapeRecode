@@ -6,7 +6,6 @@ import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.LinearVelocity;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +25,7 @@ public class ProngSubsystem extends SubsystemBase {
   private ProngIO io;
   private ProngIOInputsAutoLogged inputsAutoLogged = new ProngIOInputsAutoLogged();
 
-  public static ProngSubsystem m_instance;
+  private static ProngSubsystem m_instance;
 
   @Getter @Setter private Rotation2d wristSetpoint;
   @Getter @Setter private LinearVelocity rollerVelocity;

@@ -1,9 +1,13 @@
 package team5427.frc.robot.io;
 
+import static edu.wpi.first.units.Units.MetersPerSecond;
+
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import team5427.frc.robot.Constants.DriverConstants;
-import team5427.frc.robot.commands.cascade.MoveCascadeToPosition;
+import team5427.frc.robot.commands.cascade.MoveCascadeAll;
+import team5427.frc.robot.commands.cascade.MoveProngAll;
 import team5427.frc.robot.subsystems.Cascade.CascadeConstants;
+import team5427.frc.robot.subsystems.ProngEffector.ProngConstants;
 
 public class OperatorControls {
   private CommandXboxController joy;
@@ -20,13 +24,49 @@ public class OperatorControls {
 
   /** Made private to prevent multiple calls to this method */
   private void initalizeTriggers() {
-    joy.rightBumper()
+    joy.a()
       .onTrue(
-        new MoveCascadeToPosition(CascadeConstants.kL2Distance)
+        new MoveCascadeAll(CascadeConstants.kL1Distance, CascadeConstants.kL1Rotation)
+      )
+      .onTrue(
+        new MoveProngAll(MetersPerSecond.of(-0.5), ProngConstants.kL1Rotation)
       );
-    joy.leftBumper()
+    joy.x()
       .onTrue(
-        new MoveCascadeToPosition(CascadeConstants.kStowDistance)
+        new MoveCascadeAll(CascadeConstants.kL2Distance, CascadeConstants.kL2Rotation)
+      )
+      .onTrue(
+        new MoveProngAll(MetersPerSecond.of(-0.5), ProngConstants.kL2Rotation)
+      );
+    joy.b()
+      .onTrue(
+        new MoveCascadeAll(CascadeConstants.kL3Distance, CascadeConstants.kL3Rotation)
+      )
+      .onTrue(
+        new MoveProngAll(MetersPerSecond.of(-0.5), ProngConstants.kL3Rotation)
+      );
+    joy.y()
+      .onTrue(
+        new MoveCascadeAll(CascadeConstants.kL4Distance, CascadeConstants.kL4Rotation)
+      )
+      .onTrue(
+        new MoveProngAll(MetersPerSecond.of(-0.5), ProngConstants.kL4Rotation)
+      );
+
+    joy.leftTrigger()
+      .whileTrue(
+        new MoveCascadeAll(CascadeConstants.kIntakeDistance, CascadeConstants.kIntakeRotation)
+      )
+      .whileTrue(
+        new MoveProngAll(ProngConstants.kCoralIntakeVelocity, ProngConstants.kIntakePosition)
+      );
+
+    joy.povDown()
+      .onTrue(
+        new MoveCascadeAll(CascadeConstants.kStowDistance, CascadeConstants.kStowRotation)
+      )
+      .onTrue(
+        new MoveProngAll(MetersPerSecond.of(-0.5), ProngConstants.kStowPosition)
       );
   }
 }

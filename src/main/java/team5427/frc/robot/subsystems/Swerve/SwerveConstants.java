@@ -20,7 +20,7 @@ import team5427.lib.motors.MotorUtil;
 import team5427.lib.systems.swerve.SwerveUtil;
 
 public final class SwerveConstants {
-  public static final double kWheelDiameterMeters = Units.inchesToMeters(3.98);
+  public static final double kWheelDiameterMeters = Units.inchesToMeters(2.195 * 2.0);
   public static final double kWheelRadiusMeters = kWheelDiameterMeters / 2.0;
   public static final double kTrackWidth = Units.inchesToMeters(22.75);
   public static final double kWheelBase = Units.inchesToMeters(22.75);
@@ -48,14 +48,14 @@ public final class SwerveConstants {
     kDriveMotorConfiguration.currentLimit = 80;
     kDriveMotorConfiguration.finalDiameterMeters = kWheelDiameterMeters;
 
-    kDriveMotorConfiguration.maxVelocity =
-        kDriveMotorConfiguration.getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
+    kDriveMotorConfiguration.maxVelocity = kDriveMotorConfiguration
+        .getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
     kDriveMotorConfiguration.maxAcceleration = kDriveMotorConfiguration.maxVelocity * 2.0;
 
-    kDriveMotorConfiguration.kP = 70.789; // 2.64
+    kDriveMotorConfiguration.kP = 70.789; // 2.64 , 30.64
     // kDriveMotorConfiguration.kV = 0.75;
     kDriveMotorConfiguration.kA = 6.0;
-    kDriveMotorConfiguration.kS = 0.7;
+    kDriveMotorConfiguration.kS = 0.5;
     kDriveMotorConfiguration.altV = kDriveMotorConfiguration.maxVelocity;
     kDriveMotorConfiguration.altA = kDriveMotorConfiguration.maxAcceleration;
   }
@@ -69,8 +69,8 @@ public final class SwerveConstants {
     kSteerMotorConfiguration.currentLimit = 40;
     kSteerMotorConfiguration.withFOC = true;
 
-    kSteerMotorConfiguration.maxVelocity =
-        kSteerMotorConfiguration.getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
+    kSteerMotorConfiguration.maxVelocity = kSteerMotorConfiguration
+        .getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
     kSteerMotorConfiguration.maxAcceleration = kSteerMotorConfiguration.maxVelocity * 100.0;
 
     // Tunable values
@@ -85,21 +85,19 @@ public final class SwerveConstants {
 
   public static final CANDeviceId kPigeonCANId = new CANDeviceId(11, "*");
 
-  public static final double kDrivetrainRadius =
+  public static final double kDrivetrainRadius = Math.max(
       Math.max(
-          Math.max(
-              Math.hypot(kWheelBase / 2, kTrackWidth / 2),
-              Math.hypot(kWheelBase / 2, -kTrackWidth / 2)),
-          Math.max(
-              Math.hypot(-kWheelBase / 2, kTrackWidth / 2),
-              Math.hypot(-kWheelBase / 2, -kTrackWidth / 2)));
+          Math.hypot(kWheelBase / 2, kTrackWidth / 2),
+          Math.hypot(kWheelBase / 2, -kTrackWidth / 2)),
+      Math.max(
+          Math.hypot(-kWheelBase / 2, kTrackWidth / 2),
+          Math.hypot(-kWheelBase / 2, -kTrackWidth / 2)));
 
-  public static final SwerveDriveKinematics m_kinematics =
-      new SwerveDriveKinematics(
-          new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-          new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-          new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-          new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+  public static final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
+      new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+      new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+      new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+      new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
   public static final SwerveUtil kSwerveUtilInstance = new SwerveUtil();
 
