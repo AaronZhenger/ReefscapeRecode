@@ -7,7 +7,6 @@ import static edu.wpi.first.units.Units.Rotations;
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
 import com.ctre.phoenix6.hardware.ParentDevice;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularAcceleration;
@@ -46,9 +45,9 @@ public class ProngIOTalon implements ProngIO {
     wrist.apply(ProngConstants.kWristConfiguration);
     wrist.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
     wrist.getTalonFX().getConfigurator().apply(wrist.talonConfig);
-    
+
     roller = new SteelTalonFX(ProngConstants.kRollerServoId);
-    
+
     roller.apply(ProngConstants.kRollerConfiguration);
 
     wristPosition = wrist.getTalonFX().getPosition();
@@ -67,33 +66,31 @@ public class ProngIOTalon implements ProngIO {
     rollerTemperature = roller.getTalonFX().getDeviceTemp();
 
     BaseStatusSignal.setUpdateFrequencyForAll(
-      50, 
-      wristPosition,
-      wristVelocity,
-      wristAcceleration,
-      wristCurrent,
-      wristVoltage,
-      rollerVelocity,
-      rollerAcceleration,
-      rollerCurrent,
-      rollerVoltage
-    );
+        50,
+        wristPosition,
+        wristVelocity,
+        wristAcceleration,
+        wristCurrent,
+        wristVoltage,
+        rollerVelocity,
+        rollerAcceleration,
+        rollerCurrent,
+        rollerVoltage);
 
     BaseStatusSignal.setUpdateFrequencyForAll(10, rollerTemperature);
 
     BaseStatusSignal.waitForAll(
-      0.02, 
-      wristPosition,
-      wristVelocity,
-      wristAcceleration,
-      wristCurrent,
-      wristVoltage,
-      rollerVelocity,
-      rollerAcceleration,
-      rollerCurrent,
-      rollerVoltage,
-      rollerTemperature
-    );
+        0.02,
+        wristPosition,
+        wristVelocity,
+        wristAcceleration,
+        wristCurrent,
+        wristVoltage,
+        rollerVelocity,
+        rollerAcceleration,
+        rollerCurrent,
+        rollerVoltage,
+        rollerTemperature);
 
     ParentDevice.optimizeBusUtilizationForAll(wrist.getTalonFX(), roller.getTalonFX());
     wrist.setEncoderPosition(ProngConstants.kZeroPosition);
@@ -102,17 +99,16 @@ public class ProngIOTalon implements ProngIO {
   @Override
   public void updateInputs(ProngIOInputs inputs) {
     BaseStatusSignal.refreshAll(
-      wristPosition,
-      wristVelocity,
-      wristAcceleration,
-      wristCurrent,
-      wristVoltage,
-      rollerVelocity,
-      rollerAcceleration,
-      rollerCurrent,
-      rollerVoltage,
-      rollerTemperature
-    );
+        wristPosition,
+        wristVelocity,
+        wristAcceleration,
+        wristCurrent,
+        wristVoltage,
+        rollerVelocity,
+        rollerAcceleration,
+        rollerCurrent,
+        rollerVoltage,
+        rollerTemperature);
 
     inputs.wristPosition = Rotation2d.fromRotations(wristPosition.getValue().in(Rotations));
     inputs.wristVelocity = wristVelocity.getValue();

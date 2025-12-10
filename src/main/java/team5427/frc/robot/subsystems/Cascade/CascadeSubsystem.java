@@ -7,7 +7,6 @@ import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import lombok.Getter;
 import lombok.Setter;
-
 import org.littletonrobotics.junction.Logger;
 import team5427.frc.robot.subsystems.Cascade.io.CascadeIO;
 import team5427.frc.robot.subsystems.Cascade.io.CascadeIOInputsAutoLogged;
@@ -42,6 +41,7 @@ public class CascadeSubsystem extends SubsystemBase {
   }
 
   public boolean cascadeAtGoal() {
-    return Math.abs(inputs.cascadeHeight.minus(cascadeSetpoint).in(Meters)) < CascadeConstants.kCascadeTolerance.in(Meters);
+    return Math.abs(inputs.cascadeHeight.minus(cascadeSetpoint).in(Meters))
+        < CascadeConstants.kCascadeTolerance.in(Meters);
   }
 }

@@ -1,10 +1,23 @@
 package team5427.frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import org.littletonrobotics.junction.Logger;
 
 public final class Superstructure {
   public static final String dashboardKey = "/Superstructure";
+
+  public static final Trigger disabledTrigger =
+        new Trigger(
+            () -> {
+              return DriverStation.isDisabled();
+            });
+
+  public static final Trigger autonTrigger =
+        new Trigger(
+            () -> {
+              return DriverStation.isAutonomous();
+            });
 
   public static enum SwerveStates {
     RAW_DRIVING,
@@ -50,47 +63,7 @@ public final class Superstructure {
 
   public static SwerveStates kSelectedSwerveState = SwerveStates.DISABLED;
 
-  public static enum IntakeStates {
-    INTAKING,
-    DISABLED,
-    STOWED,
-    OUTAKING;
-
-    public static class IntakeTriggers {
-      public static final Trigger kIntaking =
-          new Trigger(
-              () -> {
-                return kSelectedIntakeState.equals(INTAKING);
-              });
-
-      public static final Trigger kDisabled =
-          new Trigger(
-              () -> {
-                return kSelectedIntakeState.equals(DISABLED);
-              });
-
-      public static final Trigger kStowed =
-          new Trigger(
-              () -> {
-                return kSelectedIntakeState.equals(STOWED);
-              });
-
-      public static final Trigger kOutaking =
-          new Trigger(
-              () -> {
-                return kSelectedIntakeState.equals(OUTAKING);
-              });
-    }
-  }
-
-  public static IntakeStates kSelectedIntakeState = IntakeStates.STOWED;
-
-  public static void logStates() {
-    Logger.recordOutput(dashboardKey + "/" + "SwerveState", kSelectedSwerveState);
-    Logger.recordOutput(dashboardKey + "/" + "IntakeState", kSelectedIntakeState);
-  }
-
-  public enum ProngEffectorStates {
+  public enum ProngStates {
     ALGAE_INTAKE,
     ALGAE_OUTAKE,
     CORAL_INTAKE,
@@ -99,5 +72,74 @@ public final class Superstructure {
     ALGAE_STOWED,
     DISABLED,
     IDLE;
+
+    public static class ProngTriggers {
+      public static final Trigger kAlgae_Intake =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(ALGAE_INTAKE);
+              });
+      public static final Trigger kAlgae_Outake =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(ALGAE_OUTAKE);
+              });
+      public static final Trigger kCoral_Intake =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(CORAL_INTAKE);
+              });
+      public static final Trigger kCoral_Outake =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(CORAL_OUTAKE);
+              });
+      public static final Trigger kCoral_Stowed =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(CORAL_STOWED);
+              });
+      public static final Trigger kAlgae_Stowed =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(ALGAE_STOWED);
+              });
+      public static final Trigger kDisabled =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(DISABLED);
+              });
+      public static final Trigger kIdle =
+          new Trigger(
+              () -> {
+                return kSelectedProngState.equals(IDLE);
+              });
+    }
+  }
+
+  public static ProngStates kSelectedProngState = ProngStates.DISABLED;
+
+  public enum GamePieceMode {
+    CORAL,
+    ALGAE;
+
+    public static class GamePieceTriggers {
+      public static final Trigger kCoral =
+        new Trigger(() -> {
+          return kSelectedGamePieceMode.equals(GamePieceMode.CORAL);
+        });
+      public static final Trigger kAlgae =
+        new Trigger(() -> {
+          return kSelectedGamePieceMode.equals(GamePieceMode.ALGAE);
+        });
+    }
+  }
+
+  public static GamePieceMode kSelectedGamePieceMode = GamePieceMode.CORAL;
+
+  public static void logStates() {
+    Logger.recordOutput(dashboardKey + "/" + "SwerveState", kSelectedSwerveState);
+    Logger.recordOutput(dashboardKey + "/" + "ProngState", kSelectedProngState);
+
   }
 }

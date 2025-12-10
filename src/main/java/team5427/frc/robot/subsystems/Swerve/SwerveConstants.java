@@ -48,8 +48,8 @@ public final class SwerveConstants {
     kDriveMotorConfiguration.currentLimit = 80;
     kDriveMotorConfiguration.finalDiameterMeters = kWheelDiameterMeters;
 
-    kDriveMotorConfiguration.maxVelocity = kDriveMotorConfiguration
-        .getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
+    kDriveMotorConfiguration.maxVelocity =
+        kDriveMotorConfiguration.getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
     kDriveMotorConfiguration.maxAcceleration = kDriveMotorConfiguration.maxVelocity * 2.0;
 
     kDriveMotorConfiguration.kP = 70.789; // 2.64 , 30.64
@@ -69,8 +69,8 @@ public final class SwerveConstants {
     kSteerMotorConfiguration.currentLimit = 40;
     kSteerMotorConfiguration.withFOC = true;
 
-    kSteerMotorConfiguration.maxVelocity = kSteerMotorConfiguration
-        .getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
+    kSteerMotorConfiguration.maxVelocity =
+        kSteerMotorConfiguration.getStandardMaxVelocity(MotorUtil.kKrakenX60FOC_MaxRPM);
     kSteerMotorConfiguration.maxAcceleration = kSteerMotorConfiguration.maxVelocity * 100.0;
 
     // Tunable values
@@ -85,19 +85,21 @@ public final class SwerveConstants {
 
   public static final CANDeviceId kPigeonCANId = new CANDeviceId(11, "*");
 
-  public static final double kDrivetrainRadius = Math.max(
+  public static final double kDrivetrainRadius =
       Math.max(
-          Math.hypot(kWheelBase / 2, kTrackWidth / 2),
-          Math.hypot(kWheelBase / 2, -kTrackWidth / 2)),
-      Math.max(
-          Math.hypot(-kWheelBase / 2, kTrackWidth / 2),
-          Math.hypot(-kWheelBase / 2, -kTrackWidth / 2)));
+          Math.max(
+              Math.hypot(kWheelBase / 2, kTrackWidth / 2),
+              Math.hypot(kWheelBase / 2, -kTrackWidth / 2)),
+          Math.max(
+              Math.hypot(-kWheelBase / 2, kTrackWidth / 2),
+              Math.hypot(-kWheelBase / 2, -kTrackWidth / 2)));
 
-  public static final SwerveDriveKinematics m_kinematics = new SwerveDriveKinematics(
-      new Translation2d(kWheelBase / 2, kTrackWidth / 2),
-      new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
-      new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
-      new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
+  public static final SwerveDriveKinematics m_kinematics =
+      new SwerveDriveKinematics(
+          new Translation2d(kWheelBase / 2, kTrackWidth / 2),
+          new Translation2d(kWheelBase / 2, -kTrackWidth / 2),
+          new Translation2d(-kWheelBase / 2, kTrackWidth / 2),
+          new Translation2d(-kWheelBase / 2, -kTrackWidth / 2));
 
   public static final SwerveUtil kSwerveUtilInstance = new SwerveUtil();
 

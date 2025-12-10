@@ -19,8 +19,6 @@ import team5427.frc.robot.subsystems.vision.io.QuestNav;
 
 public class PilotingControls {
   private CommandXboxController joy;
-  private Trigger autonTrigger;
-  private Trigger disabledTrigger;
 
   public PilotingControls() {
     joy = new CommandXboxController(DriverConstants.kDriverJoystickPort);
@@ -35,17 +33,6 @@ public class PilotingControls {
   /** Made private to prevent multiple calls to this method */
   private void initalizeTriggers() {
 
-    disabledTrigger =
-        new Trigger(
-            () -> {
-              return DriverStation.isDisabled();
-            });
-
-    autonTrigger =
-        new Trigger(
-            () -> {
-              return DriverStation.isAutonomous();
-            });
     DriverProfiles.DriverTriggers.kDualAE
         .and(joy.leftBumper())
         .toggleOnTrue(
@@ -72,7 +59,7 @@ public class PilotingControls {
                   Superstructure.kSelectedSwerveState = Superstructure.SwerveStates.RAW_DRIVING;
                 }));
 
-    autonTrigger
+    Superstructure.autonTrigger
         .onTrue(
             new InstantCommand(
                 () -> {
@@ -84,14 +71,14 @@ public class PilotingControls {
                   Superstructure.kSelectedSwerveState = SwerveStates.RAW_DRIVING;
                 }));
 
-    disabledTrigger
+    Superstructure.disabledTrigger
         .onTrue(
             new InstantCommand(
                 () -> {
                   Superstructure.kSelectedSwerveState = SwerveStates.DISABLED;
                 }))
         .negate()
-        .and(autonTrigger.negate())
+        .and(Superstructure.autonTrigger.negate())
         .onTrue(
             new InstantCommand(
                 () -> {
@@ -99,19 +86,19 @@ public class PilotingControls {
                 }));
 
     Superstructure.SwerveStates.SwerveTriggers.kRawDriving
-        .and(autonTrigger.negate())
-        .and(disabledTrigger.negate())
+        .and(Superstructure.autonTrigger.negate())
+        .and(Superstructure.disabledTrigger.negate())
         .whileTrue(new RawChassisMovement(joy));
     Superstructure.SwerveStates.SwerveTriggers.kRawDriving.whileTrue(new RawChassisMovement(joy));
     Superstructure.SwerveStates.SwerveTriggers.kControlledDriving.whileTrue(
         new ControlledChassisMovement(joy));
     // SwerveSubsystem.getInstance().setDefaultCommand(new RawChassisMovement(joy));
     Superstructure.SwerveStates.SwerveTriggers.kControlledDriving
-        .and(autonTrigger.negate())
-        .and(disabledTrigger.negate())
+        .and(Superstructure.autonTrigger.negate())
+        .and(Superstructure.disabledTrigger.negate())
         .whileTrue(new ControlledChassisMovement(joy));
     Superstructure.SwerveStates.SwerveTriggers.kAuto_Align
-        .and(disabledTrigger.negate())
+        .and(Superstructure.disabledTrigger.negate())
         .whileTrue(new MoveChassisToPose(joy, new Pose2d(5, 5.5, Rotation2d.k180deg)));
     joy.a()
         .and(Constants.ModeTriggers.kSim)

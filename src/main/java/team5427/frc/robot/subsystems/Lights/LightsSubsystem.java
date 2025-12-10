@@ -2,7 +2,6 @@ package team5427.frc.robot.subsystems.Lights;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.littletonrobotics.junction.Logger;
-
 import team5427.frc.robot.subsystems.Lights.io.LightsIO;
 import team5427.frc.robot.subsystems.Lights.io.LightsIOBlinkin;
 import team5427.frc.robot.subsystems.Lights.io.LightsIOInputsAutoLogged;
@@ -17,8 +16,7 @@ public class LightsSubsystem extends SubsystemBase {
   private static LightsSubsystem m_instance;
 
   public static LightsSubsystem getInstance() {
-    if (m_instance == null)
-      m_instance = new LightsSubsystem();
+    if (m_instance == null) m_instance = new LightsSubsystem();
     return m_instance;
   }
 
@@ -30,7 +28,7 @@ public class LightsSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     lights.setPWM(pattern);
-    
+
     Logger.processInputs("Lights", inputsAutoLogged);
   }
 

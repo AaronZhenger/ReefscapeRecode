@@ -6,22 +6,20 @@ import team5427.frc.robot.subsystems.Cascade.CascadeSubsystem;
 import team5427.frc.robot.subsystems.ProngEffector.ProngSubsystem;
 
 public class Intake extends Command {
-    private CascadeSubsystem cascade;
-    private ProngSubsystem prong;
+  private CascadeSubsystem cascade;
+  private ProngSubsystem prong;
 
-    private RawIntakeConfiguration config;
-    
-    public Intake(RawIntakeConfiguration config) {
-        cascade = CascadeSubsystem.getInstance();
-        prong = ProngSubsystem.getInstance();
-        
-        this.config = config;
+  private RawIntakeConfiguration config;
 
-        addRequirements(cascade, prong);
-    }
+  public Intake(RawIntakeConfiguration config) {
+    cascade = CascadeSubsystem.getInstance();
+    prong = ProngSubsystem.getInstance();
 
-    @Override
-    public void initialize() {
-        
-    }
+    this.config = config;
+
+    addRequirements(cascade, prong);
+  }
+
+  @Override
+  public void initialize() {}
 }

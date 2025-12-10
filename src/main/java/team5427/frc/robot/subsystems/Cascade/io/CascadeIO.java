@@ -26,7 +26,7 @@ public interface CascadeIO {
     public LinearVelocity cascadeLinearVelocity = MetersPerSecond.of(0);
     public AngularVelocity cascadeAngularVelocity = RotationsPerSecond.of(0);
     public LinearAcceleration cascadeLinearAcceleration = MetersPerSecondPerSecond.of(0);
-    
+
     public Voltage cascadeMasterMotorVoltage = Volts.of(0);
     public Current cascadeMasterMotorCurrent = Amps.of(0);
 

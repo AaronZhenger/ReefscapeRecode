@@ -73,8 +73,9 @@ public class CascadeIOMagicTalon implements CascadeIO {
     cascadeMotorSlave.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
     cascadeMotorSlave.getTalonFX().getConfigurator().apply(cascadeMotorSlave.talonConfig);
 
-    cascadeMotorSlave.getTalonFX().setControl(
-      new Follower(cascadeMotorMaster.getTalonFX().getDeviceID(), true));
+    cascadeMotorSlave
+        .getTalonFX()
+        .setControl(new Follower(cascadeMotorMaster.getTalonFX().getDeviceID(), true));
 
     pivotMotorMaster.apply(CascadeConstants.kPivotConfiguration);
     pivotMotorMaster.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
@@ -84,8 +85,9 @@ public class CascadeIOMagicTalon implements CascadeIO {
     pivotMotorSlave.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;
     pivotMotorSlave.getTalonFX().getConfigurator().apply(pivotMotorSlave.talonConfig);
 
-    pivotMotorSlave.getTalonFX().setControl(
-      new Follower(pivotMotorMaster.getTalonFX().getDeviceID(), false));
+    pivotMotorSlave
+        .getTalonFX()
+        .setControl(new Follower(pivotMotorMaster.getTalonFX().getDeviceID(), false));
 
     pivotCANcoder =
         new CANcoder(
@@ -115,51 +117,49 @@ public class CascadeIOMagicTalon implements CascadeIO {
     pivotSlaveMotorVoltage = pivotMotorSlave.getTalonFX().getMotorVoltage();
 
     BaseStatusSignal.setUpdateFrequencyForAll(
-      50,
-      cascadeMasterMotorPosition,
-      cascadeAngularVelocity,
-      cascadeAngularAcceleration,
-      cascadeMasterMotorCurrent,
-      cascadeMasterMotorVoltage,
-      cascadeSlaveMotorCurrent,
-      cascadeSlaveMotorVoltage
-    );
+        50,
+        cascadeMasterMotorPosition,
+        cascadeAngularVelocity,
+        cascadeAngularAcceleration,
+        cascadeMasterMotorCurrent,
+        cascadeMasterMotorVoltage,
+        cascadeSlaveMotorCurrent,
+        cascadeSlaveMotorVoltage);
 
     BaseStatusSignal.setUpdateFrequencyForAll(
-      50,
-      pivotPosition,
-      pivotAngularVelocity,
-      pivotAngularAcceleration,
-      pivotMasterMotorCurrent,
-      pivotMasterMotorVoltage,
-      pivotSlaveMotorCurrent,
-      pivotSlaveMotorVoltage
-    );
+        50,
+        pivotPosition,
+        pivotAngularVelocity,
+        pivotAngularAcceleration,
+        pivotMasterMotorCurrent,
+        pivotMasterMotorVoltage,
+        pivotSlaveMotorCurrent,
+        pivotSlaveMotorVoltage);
 
     BaseStatusSignal.waitForAll(
-      0.02,
-      cascadeAngularVelocity,
-      cascadeAngularAcceleration,
-      cascadeMasterMotorCurrent,
-      cascadeMasterMotorVoltage,
-      cascadeSlaveMotorCurrent,
-      cascadeSlaveMotorVoltage
-    );
-        
-    BaseStatusSignal.waitForAll(
-      0.02,
-      pivotPosition,
-      pivotAngularVelocity,
-      pivotAngularAcceleration,
-      pivotMasterMotorCurrent,
-      pivotMasterMotorVoltage,
-      pivotSlaveMotorCurrent,
-      pivotSlaveMotorVoltage,
-      pivotAbsolutePosition
-    );
+        0.02,
+        cascadeAngularVelocity,
+        cascadeAngularAcceleration,
+        cascadeMasterMotorCurrent,
+        cascadeMasterMotorVoltage,
+        cascadeSlaveMotorCurrent,
+        cascadeSlaveMotorVoltage);
 
-    ParentDevice.optimizeBusUtilizationForAll(cascadeMotorMaster.getTalonFX(), cascadeMotorSlave.getTalonFX());
-    ParentDevice.optimizeBusUtilizationForAll(pivotMotorMaster.getTalonFX(), pivotMotorSlave.getTalonFX());
+    BaseStatusSignal.waitForAll(
+        0.02,
+        pivotPosition,
+        pivotAngularVelocity,
+        pivotAngularAcceleration,
+        pivotMasterMotorCurrent,
+        pivotMasterMotorVoltage,
+        pivotSlaveMotorCurrent,
+        pivotSlaveMotorVoltage,
+        pivotAbsolutePosition);
+
+    ParentDevice.optimizeBusUtilizationForAll(
+        cascadeMotorMaster.getTalonFX(), cascadeMotorSlave.getTalonFX());
+    ParentDevice.optimizeBusUtilizationForAll(
+        pivotMotorMaster.getTalonFX(), pivotMotorSlave.getTalonFX());
 
     pivotMotorMaster.setEncoderPosition(pivotCANcoder.getPosition().getValueAsDouble());
   }
@@ -167,30 +167,32 @@ public class CascadeIOMagicTalon implements CascadeIO {
   @Override
   public void updateInputs(CascadeIOInputs inputs) {
     BaseStatusSignal.refreshAll(
-      cascadeAngularVelocity,
-      cascadeAngularAcceleration,
-      cascadeMasterMotorCurrent,
-      cascadeMasterMotorVoltage,
-      cascadeSlaveMotorCurrent,
-      cascadeSlaveMotorVoltage
-    );
-        
-    BaseStatusSignal.refreshAll(
-      pivotPosition,
-      pivotAngularVelocity,
-      pivotAngularAcceleration,
-      pivotMasterMotorCurrent,
-      pivotMasterMotorVoltage,
-      pivotSlaveMotorCurrent,
-      pivotSlaveMotorVoltage,
-      pivotAbsolutePosition
-    );
+        cascadeAngularVelocity,
+        cascadeAngularAcceleration,
+        cascadeMasterMotorCurrent,
+        cascadeMasterMotorVoltage,
+        cascadeSlaveMotorCurrent,
+        cascadeSlaveMotorVoltage);
 
-    inputs.cascadeHeight = Meters.of(cascadeMotorMaster.getEncoderPosition(cascadeMasterMotorPosition));
+    BaseStatusSignal.refreshAll(
+        pivotPosition,
+        pivotAngularVelocity,
+        pivotAngularAcceleration,
+        pivotMasterMotorCurrent,
+        pivotMasterMotorVoltage,
+        pivotSlaveMotorCurrent,
+        pivotSlaveMotorVoltage,
+        pivotAbsolutePosition);
+
+    inputs.cascadeHeight =
+        Meters.of(cascadeMotorMaster.getEncoderPosition(cascadeMasterMotorPosition));
     inputs.cascadeAngularVelocity = cascadeAngularVelocity.getValue();
-    inputs.cascadeLinearVelocity = MetersPerSecond.of(cascadeMotorMaster.getEncoderVelocity(cascadeAngularVelocity));
-    inputs.cascadeLinearAcceleration = MetersPerSecondPerSecond.of(cascadeMotorMaster.getEncoderAcceleration(cascadeAngularAcceleration));
-    
+    inputs.cascadeLinearVelocity =
+        MetersPerSecond.of(cascadeMotorMaster.getEncoderVelocity(cascadeAngularVelocity));
+    inputs.cascadeLinearAcceleration =
+        MetersPerSecondPerSecond.of(
+            cascadeMotorMaster.getEncoderAcceleration(cascadeAngularAcceleration));
+
     inputs.cascadeMasterMotorCurrent = cascadeMasterMotorCurrent.getValue();
     inputs.cascadeMasterMotorVoltage = cascadeMasterMotorVoltage.getValue();
 
@@ -198,7 +200,8 @@ public class CascadeIOMagicTalon implements CascadeIO {
     inputs.cascadeSlaveMotorVoltage = cascadeSlaveMotorVoltage.getValue();
 
     inputs.pivotAngle = Rotation2d.fromRotations(pivotPosition.getValue().in(Rotations));
-    inputs.pivotAbsoluteAngle = Rotation2d.fromRotations(pivotAbsolutePosition.getValue().in(Rotations));
+    inputs.pivotAbsoluteAngle =
+        Rotation2d.fromRotations(pivotAbsolutePosition.getValue().in(Rotations));
     inputs.pivotVelocity = pivotAngularVelocity.getValue();
     inputs.pivotAcceleration = pivotAngularAcceleration.getValue();
 
@@ -232,12 +235,16 @@ public class CascadeIOMagicTalon implements CascadeIO {
   @Override
   public void stopCascadeMotors(boolean stopped) {
     cascadeMotorMaster.setSetpoint(
-      stopped ? RotationsPerSecond.of(0) : pivotMotorMaster.getTalonFX().getVelocity().getValue());
+        stopped
+            ? RotationsPerSecond.of(0)
+            : pivotMotorMaster.getTalonFX().getVelocity().getValue());
   }
 
   @Override
   public void stopPivotMotors(boolean stopped) {
     pivotMotorMaster.setSetpoint(
-      stopped ? RotationsPerSecond.of(0) : pivotMotorMaster.getTalonFX().getVelocity().getValue());
+        stopped
+            ? RotationsPerSecond.of(0)
+            : pivotMotorMaster.getTalonFX().getVelocity().getValue());
   }
 }
