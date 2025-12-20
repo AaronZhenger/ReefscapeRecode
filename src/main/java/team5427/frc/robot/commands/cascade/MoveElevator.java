@@ -1,28 +1,24 @@
 package team5427.frc.robot.commands.cascade;
 
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj2.command.Command;
 import team5427.frc.robot.subsystems.Cascade.CascadeSubsystem;
 
-public class MoveCascadeAll extends Command {
+public class MoveElevator extends Command {
   private CascadeSubsystem cascadeSubsystem;
 
-  private Distance distance;
-  private Rotation2d angle;
+  private Distance position;
 
-  public MoveCascadeAll(Distance distance, Rotation2d angle) {
+  public MoveElevator(Distance position) {
     cascadeSubsystem = CascadeSubsystem.getInstance();
     addRequirements(cascadeSubsystem);
 
-    this.distance = distance;
-    this.angle = angle;
+    this.position = position;
   }
 
   @Override
   public void initialize() {
-    cascadeSubsystem.setCascadeSetpoint(distance);
-    cascadeSubsystem.setPivotSetpoint(angle);
+    cascadeSubsystem.setCascadeSetpoint(position);
   }
 
   @Override

@@ -40,7 +40,7 @@ public class ProngIOTalon implements ProngIO {
 
   public ProngIOTalon() {
     wrist = new MagicSteelTalonFX(ProngConstants.kWristServoId);
-    wrist.useTorqueCurrentFOC(true);
+    wrist.useTorqueCurrentFOC(false);
 
     wrist.apply(ProngConstants.kWristConfiguration);
     wrist.talonConfig.ClosedLoopGeneral.ContinuousWrap = false;

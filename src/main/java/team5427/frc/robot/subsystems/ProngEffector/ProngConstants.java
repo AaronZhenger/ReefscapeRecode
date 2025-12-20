@@ -20,7 +20,7 @@ public class ProngConstants {
 
   static {
     kWristConfiguration.gearRatio =
-        new ComplexGearRatio((14.0 / 70.0), (18.0 / 72.0), (17.0 / 18.0));
+        new ComplexGearRatio((14.0 / 70.0), (18.0 / 72.0), (17.0 / 32.0));
     kWristConfiguration.idleState = IdleState.kBrake;
     kWristConfiguration.isInverted = false;
     kWristConfiguration.mode = MotorMode.kServo;
@@ -79,10 +79,12 @@ public class ProngConstants {
   public static final LinearVelocity kAlgaeFloorIntakeVelocity = MetersPerSecond.of(4.0);
   public static final LinearVelocity kAlgaeReefIntakeVelocity = MetersPerSecond.of(4.0);
 
-  public static final LinearVelocity kCoralIntakeVelocity = MetersPerSecond.of(4.0);
+  public static final LinearVelocity kCoralIntakeVelocity = MetersPerSecond.of(-4.0);
 
   public static final LinearVelocity kAlgaeProcesserVelocity = MetersPerSecond.of(2.0);
   public static final LinearVelocity kAlgaeBargeVelocity = MetersPerSecond.of(2.0);
 
   public static final LinearVelocity kCoralScoringVelocity = MetersPerSecond.of(1.0);
+
+  public static final LinearVelocity kStowVelocity = MetersPerSecond.of(-0.5);
 }

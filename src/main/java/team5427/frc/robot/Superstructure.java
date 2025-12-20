@@ -8,16 +8,16 @@ public final class Superstructure {
   public static final String dashboardKey = "/Superstructure";
 
   public static final Trigger disabledTrigger =
-        new Trigger(
-            () -> {
-              return DriverStation.isDisabled();
-            });
+      new Trigger(
+          () -> {
+            return DriverStation.isDisabled();
+          });
 
   public static final Trigger autonTrigger =
-        new Trigger(
-            () -> {
-              return DriverStation.isAutonomous();
-            });
+      new Trigger(
+          () -> {
+            return DriverStation.isAutonomous();
+          });
 
   public static enum SwerveStates {
     RAW_DRIVING,
@@ -125,13 +125,15 @@ public final class Superstructure {
 
     public static class GamePieceTriggers {
       public static final Trigger kCoral =
-        new Trigger(() -> {
-          return kSelectedGamePieceMode.equals(GamePieceMode.CORAL);
-        });
+          new Trigger(
+              () -> {
+                return kSelectedGamePieceMode.equals(GamePieceMode.CORAL);
+              });
       public static final Trigger kAlgae =
-        new Trigger(() -> {
-          return kSelectedGamePieceMode.equals(GamePieceMode.ALGAE);
-        });
+          new Trigger(
+              () -> {
+                return kSelectedGamePieceMode.equals(GamePieceMode.ALGAE);
+              });
     }
   }
 
@@ -140,6 +142,5 @@ public final class Superstructure {
   public static void logStates() {
     Logger.recordOutput(dashboardKey + "/" + "SwerveState", kSelectedSwerveState);
     Logger.recordOutput(dashboardKey + "/" + "ProngState", kSelectedProngState);
-
   }
 }

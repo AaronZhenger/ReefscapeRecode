@@ -1,16 +1,12 @@
 package team5427.frc.robot.subsystems.ProngEffector;
 
-import static edu.wpi.first.units.Units.MetersPerSecond;
-
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import lombok.Getter;
 import lombok.Setter;
 import org.littletonrobotics.junction.Logger;
-
 import team5427.frc.robot.Superstructure.GamePieceMode;
-import team5427.frc.robot.Superstructure.ProngStates;
 import team5427.frc.robot.subsystems.ProngEffector.io.ProngIO;
 import team5427.frc.robot.subsystems.ProngEffector.io.ProngIOInputsAutoLogged;
 import team5427.frc.robot.subsystems.ProngEffector.io.ProngIOTalon;
@@ -27,8 +23,6 @@ public class ProngSubsystem extends SubsystemBase {
   @Getter @Setter private Rotation2d wristSetpoint;
   @Getter @Setter private LinearVelocity rollerVelocity;
 
-  private ProngStates state;
-
   public static ProngSubsystem getInstance() {
     if (m_instance == null) m_instance = new ProngSubsystem();
     return m_instance;
@@ -36,9 +30,8 @@ public class ProngSubsystem extends SubsystemBase {
 
   public ProngSubsystem() {
     io = new ProngIOTalon();
-    rollerVelocity = MetersPerSecond.of(-0.5);
+    rollerVelocity = ProngConstants.kStowVelocity;
     wristSetpoint = Rotation2d.kZero;
-    state = ProngStates.IDLE;
   }
 
   @Override

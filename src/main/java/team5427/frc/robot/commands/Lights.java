@@ -1,4 +1,4 @@
-package team5427.frc.robot.commands.Intake;
+package team5427.frc.robot.commands;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
